@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "rubric": {
+      "type": "http",
+      "url": "https://rubric.design/mcp",
+      "headers": {
+        "Authorization": "Bearer ${user_config.api_key}"
+      }
+    }
+  }
+}

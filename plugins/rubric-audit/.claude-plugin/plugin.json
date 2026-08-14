@@ -1,0 +1,24 @@
+{
+  "name": "rubric-audit",
+  "displayName": "Rubric — UX Audit & Reporting",
+  "version": "0.1.0",
+  "description": "Audit a live site against a curated UX corpus and produce a report with severity, evidence and fixes.",
+  "author": {
+    "name": "Things Studio",
+    "url": "https://rubric.design"
+  },
+  "homepage": "https://rubric.design",
+  "repository": "https://github.com/things-studio/rubric-plugins",
+  "license": "MIT",
+  "keywords": ["ux", "audit", "accessibility", "conversion", "mcp"],
+  "mcpServers": "./.mcp.json",
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "Rubric API key",
+      "description": "Create one at https://rubric.design/app. Stored by Claude Code and sent as a bearer token; it is never written into this repository.",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}
