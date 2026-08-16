@@ -157,6 +157,38 @@ submitted === critical + high + medium + low
 If it does not, say so rather than working around it — that is a defect in the
 server, and it is reported as one.
 
+### 5b. Capture the evidence you are asserting
+
+A finding that says a label measured 4.17:1 is a claim. A cropped image of that
+label with a box around it is the proof, and the difference between the two is
+what separates a report from a consultancy deliverable.
+
+**Crop to the finding. Never ship the full page as evidence.** A full-page
+capture of a long page is megabytes in which nobody can find the 12-pixel label
+you are talking about. Capture the element and enough around it to place it,
+mark it, and move on.
+
+**Number each image to the finding it proves, and cite that number in the
+finding.** `01-hero-etiket-kontrast.png` against finding 1. An archive of
+screenshots nobody references is weight, not evidence — if the report never
+names an image, do not produce it.
+
+**Annotate.** A box or arrow on the element, and a short label carrying the
+measured value. This is the same thing the corpus asks of a product page in
+`product_detail.image-feature-callouts`; a report that recommends callouts and
+ships bare screenshots argues against itself.
+
+**Only where the evidence is visual.** Contrast, spacing, layout, a missing
+element, a target too small — capture those. A missing `autocomplete`
+attribute, an undefined CSS variable or a slow server response are settled by
+the value you already quoted, and an image of them proves nothing. Roughly a
+third of findings earn an image; producing one per finding is the burden this
+section exists to avoid.
+
+State the viewport and whether the capture is live or reconstructed. If any
+capture was not taken against the live URL, say so on the image, not only in a
+readme.
+
 ### 6. `get_report`
 
 `output: 'markdown'` for something to hand a person, `summary` for the
