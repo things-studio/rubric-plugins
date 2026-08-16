@@ -25,6 +25,24 @@ markup can settle. Everything else is `not_reached` with that as the reason.
 Do not guess a visual answer from HTML. A confident wrong finding costs the
 customer more than a gap they can see.
 
+**Audit the live URL. Never a copy of it.** Do not download, mirror or snapshot
+the site, and do not stand up a local server to serve it back to yourself. A
+mirror is not the site: scripts that never ran, fonts that resolved differently,
+CSS that depended on the real origin, and content that only appears after
+hydration all make the copy answer questions the live page would answer
+otherwise. An audit of a mirror is a confident wrong finding at scale, and the
+customer's URL is right there.
+
+**Measure inside the live page, not in a program beside it.** Checks like
+contrast, focus visibility and what sits above the fold are measurements, and
+`how_to_find` will often tell you which page to be on without telling you how to
+take the measurement. Take it in the page: your browser tool can evaluate
+JavaScript against the document, so read real values with `getComputedStyle`,
+compute a contrast ratio there, focus an element and look at what changed. One
+evaluation in the live page settles what a local Playwright rig spends minutes
+failing to reproduce. If a script is the right tool, run it IN the page — never
+as a Node program pointed at a downloaded folder.
+
 **A real URL.** Synthetic hosts — `localhost`, private IPs, `.test`/`.local`/
 `.example`, `smoke-`/`bench-`/`test-` prefixes — are deliberately never
 persisted. They return `persisted: false` and there is no report to fetch
