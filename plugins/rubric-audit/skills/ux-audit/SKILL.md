@@ -189,6 +189,43 @@ State the viewport and whether the capture is live or reconstructed. If any
 capture was not taken against the live URL, say so on the image, not only in a
 readme.
 
+**Mark it in the page, before you capture it.** Do not screenshot first and
+annotate afterwards: that needs an image library, pixel coordinates and a
+cropping pass, and it is the road to installing tooling and writing scripts.
+Draw the box in the document instead, where the browser already knows where the
+element is, then take the picture. Inject, scroll to it, capture, remove:
+
+```js
+// mark(el, '01', 'Kicker 4.17:1 · SC 1.4.3 asks 4.5:1') then screenshot
+function mark(el, n, label) {
+  const r = el.getBoundingClientRect(), mk = [];
+  const box = document.createElement('div');
+  Object.assign(box.style, { position:'absolute',
+    left:(r.x+scrollX-4)+'px', top:(r.y+scrollY-4)+'px',
+    width:(r.width+8)+'px', height:(r.height+8)+'px',
+    outline:'3px solid #E11D48', outlineOffset:'2px',
+    zIndex:2147483647, pointerEvents:'none' });
+  const tag = document.createElement('div');
+  tag.textContent = n + ' · ' + label;
+  Object.assign(tag.style, { position:'absolute',
+    left:(r.x+scrollX-4)+'px', top:(r.y+scrollY-32)+'px',
+    background:'#E11D48', color:'#fff', padding:'3px 8px', borderRadius:'4px',
+    font:'600 13px/1.5 -apple-system,sans-serif', whiteSpace:'nowrap',
+    zIndex:2147483647, pointerEvents:'none' });
+  [box, tag].forEach(e => { e.className = '__mark'; document.body.append(e); });
+  el.scrollIntoView({ block:'center' });
+}
+// afterwards: document.querySelectorAll('.__mark').forEach(e => e.remove())
+```
+
+Put the measured value in the label — `4.17:1`, `9×9 px` — so the image carries
+its own claim and survives being pasted into a ticket without the report.
+
+Capture the region if your browser tool supports it; several do not, and
+`scrollIntoView({block:'center'})` before a viewport screenshot is the fallback
+that always works. Only reach for an image library if you additionally need a
+tight crop, and never as the first move.
+
 ### 6. `get_report`
 
 `output: 'markdown'` for something to hand a person, `summary` for the
