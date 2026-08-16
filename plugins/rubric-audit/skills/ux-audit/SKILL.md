@@ -159,6 +159,15 @@ server, and it is reported as one.
 
 ### 5b. Capture the evidence you are asserting
 
+**These images belong to the report YOU hand the human, not to Rubric.**
+`submit_findings` stores observations as text and has no image field, by design:
+the server never sees the site and keeps no binaries. That is not a reason to
+skip the capture, and an audit has already skipped it on exactly that reasoning
+— "the submission schema has no slot for a screenshot, so it must be out of
+scope". The slot is your deliverable, beside the corpus findings you fetch in
+step 6. Two different contracts; do not read one as permission to drop the
+other.
+
 A finding that says a label measured 4.17:1 is a claim. A cropped image of that
 label with a box around it is the proof, and the difference between the two is
 what separates a report from a consultancy deliverable.
