@@ -107,7 +107,16 @@ honest answer.
 
 ### 5. `submit_findings`
 
-Everything, in one call where it fits — up to 300 selections.
+Everything in ONE call, passed inline as the tool argument. The cap is 300
+selections and a full checklist sits well inside it — a hundred units is
+roughly 20 KB of JSON.
+
+**Do not build a pipeline to get there.** Do not write the payload to a file,
+generate a script to assemble it, or split it into batches. An audit that spent
+forty minutes running shell commands to construct `batch2.json` is the reason
+this paragraph exists: that work is pure overhead, it takes far longer than the
+call it prepares, and the call would have accepted the whole thing at once.
+Split only if you genuinely exceed 300.
 
 **Submit the passes and the states too.** A unit you leave out is
 indistinguishable from a unit you were never given. The report cannot tell the
@@ -118,6 +127,17 @@ this whole shape exists to prevent.
 A pass produces no finding, only a count. A selection matching no known unit
 comes back in `unresolved` rather than being dropped — read that array; it
 usually means a typo in a `unit_key`.
+
+**Check the response accounts for everything you sent.** `summary.submitted` is
+how many selections arrived, and it should balance:
+
+```
+submitted === critical + high + medium + low
+           + passed + not_applicable + not_reached + unresolved.length
+```
+
+If it does not, say so rather than working around it — that is a defect in the
+server, and it is reported as one.
 
 ### 6. `get_report`
 
@@ -141,7 +161,7 @@ learn what the audit skipped.
 
 ## Cost
 
-The free tier is capped by **calls**, not money — 200 per rolling 24 hours per
+The free tier is capped by **calls**, not money — 100 per rolling 24 hours per
 account, `get_checklist` included. A per-page loop over a large site will hit
 that; batch by surface instead.
 

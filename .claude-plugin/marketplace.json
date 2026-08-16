@@ -9,7 +9,7 @@
       "name": "rubric-audit",
       "source": "./plugins/rubric-audit",
       "description": "Audit a live site against a curated UX corpus and produce a report with severity, evidence and fixes.",
-      "version": "0.1.0"
+      "version": "0.2.0"
     }
   ]
 }

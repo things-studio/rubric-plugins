@@ -1,7 +1,7 @@
 {
   "name": "rubric-audit",
   "displayName": "Rubric — UX Audit & Reporting",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Audit a live site against a curated UX corpus and produce a report with severity, evidence and fixes.",
   "author": {
     "name": "Things Studio",
