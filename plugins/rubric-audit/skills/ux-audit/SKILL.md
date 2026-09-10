@@ -51,7 +51,8 @@ a result.
 
 ## The shape
 
-Six steps. Steps 1 and 2 are separate on purpose.
+Eight steps. Steps 1 and 2 are separate on purpose, and so are 5b and 5c —
+capturing the evidence and uploading it are different decisions.
 
 ### 1. Walk the site once, before you fetch any checklist
 
