@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__.*__(submit_findings|get_report|create_annotations)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/rubric-audit-guard.js\"",
+            "timeout": 10,
+            "statusMessage": "Rubric audit guard"
+          }
+        ],
+        "description": "Refuse a submission with no annotated screenshots, and steer the report to HTML. One refusal each, then out of the way.",
+        "id": "pre:rubric:audit-guard"
+      }
+    ]
+  }
+}
