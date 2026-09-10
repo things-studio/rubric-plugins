@@ -159,14 +159,14 @@ server, and it is reported as one.
 
 ### 5b. Capture the evidence you are asserting
 
-**These images belong to the report YOU hand the human, not to Rubric.**
-`submit_findings` stores observations as text and has no image field, by design:
-the server never sees the site and keeps no binaries. That is not a reason to
-skip the capture, and an audit has already skipped it on exactly that reasoning
-— "the submission schema has no slot for a screenshot, so it must be out of
-scope". The slot is your deliverable, beside the corpus findings you fetch in
-step 6. Two different contracts; do not read one as permission to drop the
-other.
+**These images belong to the report YOU hand the human — and now, if the
+customer wants them kept, to Rubric as well.** `submit_findings` still stores
+observations as text and still has no image field; that has not changed and is
+not the route. An audit once skipped capture entirely on that reasoning — "the
+submission schema has no slot for a screenshot, so it must be out of scope" —
+and it was wrong then for the deliverable's sake. It is wrong now for a second
+reason too: `create_annotations` (step 5c) is the slot, and what goes through it
+shows up in the customer's panel and travels inside the HTML report.
 
 A finding that says a label measured 4.17:1 is a claim. A cropped image of that
 label with a box around it is the proof, and the difference between the two is
@@ -235,10 +235,47 @@ Capture the region if your browser tool supports it; several do not, and
 that always works. Only reach for an image library if you additionally need a
 tight crop, and never as the first move.
 
+### 5c. Upload the ones worth keeping
+
+The images you just made are yours until you send them. `create_annotations`
+puts them on the audit, where the customer can open them in the panel months
+later and where `output: 'html'` embeds them in the report itself.
+
+One call, every image:
+
+```
+create_annotations({
+  audit_id,
+  annotations: [{ unit_key, content_type, bytes, caption? }]
+})
+→ [{ annotation_id, unit_key, upload_url, expires_at }]
+```
+
+Then HTTP PUT each file's bytes to its own `upload_url` before it expires
+(about two hours). `content_type` is `image/png`, `image/jpeg` or `image/webp`;
+SVG is refused. `bytes` is the real size of the file you are about to send —
+it is checked before a URL is issued, so a wrong number costs you the upload.
+
+**One call, not one per image.** Every tool call is billed at the same flat
+rate, so ten separate calls charge a ten-image audit ten times over for the
+same work.
+
+An annotation finds its finding through `(audit_id, unit_key)`, so this can run
+before or after step 5. `caption` says what the image shows; the finding text
+already says what it means. Creating a row and never sending the bytes is not
+an error — that image simply does not appear.
+
+**Never ask for, enter, or capture a password.** A surface behind a login is one
+the human signs into themselves, in their own browser, before you look. And a
+capture can carry a bystander's name, address or order alongside the UI — the
+crop rule above is a privacy rule as much as a legibility one. What you upload
+is stored on the customer's account.
+
 ### 6. `get_report`
 
-`output: 'markdown'` for something to hand a person, `summary` for the
-structured payload. Findings resolve from the corpus at read time, so a report
+`output: 'html'` for something to hand a person — one self-contained file,
+print styling built in, and the screenshots you uploaded embedded inside it.
+`markdown` for plain text, `summary` for the structured payload. Findings resolve from the corpus at read time, so a report
 re-fetched later reflects the corpus as it is then.
 
 ## When you report back to the human
