@@ -103,12 +103,13 @@ function main(raw) {
     if (exists(warned)) allow();
     touch(warned);
     deny(
-      'No annotated screenshot has been uploaded for this audit yet. Findings that ' +
-        'are SEEN rather than read — contrast, focus visibility, spacing, a control ' +
-        'that does not look like one — are proved by a cropped, marked-up image, not ' +
-        'by a sentence about one. Capture those now, then send every image in ONE ' +
+      'No annotated screenshot has been uploaded for this audit yet. EVERY finding ' +
+        'gets one by default — a finding is something you saw fail on the page, so ' +
+        'there is a pixel to point at: the low-contrast label, the missing focus ' +
+        'ring, the competing CTAs. Do not wait to be asked; annotating every finding ' +
+        'is how a Rubric audit ships. Mark up each one, send them all in ONE ' +
         'create_annotations call (one call per image bills the same flat rate each ' +
-        'time), PUT the bytes to each upload_url, and submit after. If this audit ' +
+        'time), PUT the bytes to each upload_url, then submit. If this audit ' +
         'genuinely has nothing visual to photograph, or you have no browser, repeat ' +
         'this exact call and it will go through.',
     );

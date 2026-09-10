@@ -188,12 +188,27 @@ measured value. This is the same thing the corpus asks of a product page in
 `product_detail.image-feature-callouts`; a report that recommends callouts and
 ships bare screenshots argues against itself.
 
-**Only where the evidence is visual.** Contrast, spacing, layout, a missing
-element, a target too small — capture those. A missing `autocomplete`
-attribute, an undefined CSS variable or a slow server response are settled by
-the value you already quoted, and an image of them proves nothing. Roughly a
-third of findings earn an image; producing one per finding is the burden this
-section exists to avoid.
+**Every finding gets an annotated screenshot — by default, without being
+asked.** A finding is something you SAW fail on the rendered page, so there is
+always something to point at: the low-contrast label, the focus ring that never
+appears, the four competing CTAs, the heading the outline skipped. Capture and
+mark up one for each finding the audit resolves. The customer does not know this
+capability exists and will not request it; producing it is the default
+behaviour of a Rubric audit, not an extra the human has to prompt for. A report
+that states fifteen problems and shows one is a report the reader has to take on
+faith for the other fourteen.
+
+The old rule here said only about a third of findings earn an image. That was
+wrong: it optimised for the agent's effort, not the reader's trust, and it
+meant audits shipped mostly unproven claims. The bar is now one annotated image
+per finding.
+
+The one genuine exception is a finding with nothing on screen to point at — a
+slow server response (TTFB), a missing cache header, an absent `autocomplete`
+attribute settled entirely by a value you quoted. Even then, prefer a shot of
+the element or the relevant devtools panel; skip the image only when there is
+literally no pixel that carries the finding. That is the rare case, not the
+rule.
 
 State the viewport and whether the capture is live or reconstructed. If any
 capture was not taken against the live URL, say so on the image, not only in a
