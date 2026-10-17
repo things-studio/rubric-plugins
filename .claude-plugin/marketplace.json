@@ -4,12 +4,13 @@
     "name": "Things Studio",
     "url": "https://rubric.design"
   },
+  "description": "Claude Code plugins for Rubric, a curated UX corpus served to coding agents over MCP.",
   "plugins": [
     {
       "name": "rubric-audit",
       "source": "./plugins/rubric-audit",
       "description": "Audit a live site against a curated UX corpus and produce a report with severity, evidence and fixes.",
-      "version": "0.5.1"
+      "version": "0.5.2"
     }
   ]
 }

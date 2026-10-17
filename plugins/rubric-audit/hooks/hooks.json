@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "description": "Refuse a submission with no annotated screenshots, and steer the report to HTML. One refusal each, then out of the way.",
   "hooks": {
     "PreToolUse": [
       {
@@ -11,9 +11,7 @@
             "timeout": 10,
             "statusMessage": "Rubric audit guard"
           }
-        ],
-        "description": "Refuse a submission with no annotated screenshots, and steer the report to HTML. One refusal each, then out of the way.",
-        "id": "pre:rubric:audit-guard"
+        ]
       }
     ]
   }
