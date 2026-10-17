@@ -95,6 +95,16 @@ Each item hands you `how_to_find`, `url_patterns`, `fallback_nav` and the
 outcomes you may choose between. It gives you no severity and no finding text,
 because judging is not your job — observing is.
 
+**Page to the end.** `total` is how many units apply. While `next_offset` is
+not null, call again with `offset: next_offset` — a page can also end early to
+stay under a size budget, so follow it rather than counting to `limit`. Do not
+narrow the facets until the list looks short: an audit that quietly omits
+checks reads exactly like one that passed them.
+
+**Plan compact, judge full.** `detail: "compact"` leaves out `agent_prompt`
+(about 60% of the payload), which you do not need to plan the walk. Fetch the
+full item for a unit when you are ready to judge it.
+
 ### 4. Walk it again, and judge
 
 For each unit: go where `how_to_find` says, look, and pick **exactly one** of:
