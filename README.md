@@ -9,7 +9,7 @@ served to coding agents over MCP.
 ```
 
 Installing configures the MCP connection as well. You will be asked for a
-Rubric API key once; create one at <https://rubric.design/app>. It is stored by
+Rubric API key once; create one at <https://rubric.design/app/setup/mcp>. It is stored by
 Claude Code and sent as a bearer token — it is never written into this
 repository or into your project.
 

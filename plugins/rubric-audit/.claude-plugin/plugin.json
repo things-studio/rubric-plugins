@@ -1,7 +1,7 @@
 {
   "name": "rubric-audit",
   "displayName": "Rubric — UX Audit & Reporting",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Audit a live site against a curated UX corpus and produce a report with severity, evidence and fixes.",
   "author": {
     "name": "Things Studio",
@@ -16,7 +16,7 @@
     "api_key": {
       "type": "string",
       "title": "Rubric API key",
-      "description": "Create one at https://rubric.design/app. Stored by Claude Code and sent as a bearer token; it is never written into this repository.",
+      "description": "Create one at https://rubric.design/app/setup/mcp. Stored by Claude Code and sent as a bearer token; it is never written into this repository.",
       "sensitive": true,
       "required": true
     }
